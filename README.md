@@ -11,7 +11,7 @@ These are the available plugins in this repository.
 
 | Demo             | Version   | Documentation |
 |------------------|-----------|---------------|
-|[authservice](./)| [![version](https://img.shields.io/badge/Release-1.0.0.300-yellow)](./)|[Getting Started](https://developer.huawei.com/consumer/en/doc/development/AppGallery-connect-Guides/unity-getting-started-0000001271419852) [API Reference](https://developer.huawei.com/consumer/en/doc/development/AppGallery-connect-References/unity-overview-0000001322359861) |
+|[authservice](https://github.com/AppGalleryConnect/agc-client-demos-unity/tree/main/auth)| [![version](https://img.shields.io/badge/Release-1.0.0.300-yellow)](./)|[Getting Started](https://developer.huawei.com/consumer/en/doc/development/AppGallery-connect-Guides/unity-getting-started-0000001271419852) [API Reference](https://developer.huawei.com/consumer/en/doc/development/AppGallery-connect-References/unity-overview-0000001322359861) |
 
 
 
