@@ -29,12 +29,15 @@ using UnityEngine.UI;
 
 public class Test : MonoBehaviour
 {
-    public Text codeText, passwordText, emailText, userText;
-    public Text passwordLoginText, emailLoginText;
-    public Text passwordResetText, emailResetText, codeResetText;
-    public Text passwordChangeText, emailChangeText, codeChangeText;
+    public Text codeText, emailText, userText;
+    public Text emailLoginText;
+    public Text emailResetText, codeResetText;
+    public Text codeChangeText;
     public Text newEmailText, codeEmailChangeText;
-    public Text passwordLoginCodeText, emailLoginCodeText, codeLoginCodeText;
+    public Text emailLoginCodeText, codeLoginCodeText;
+
+    public InputField passwordInput, passwordLoginText, passwordChangeText, passwordResetText, passwordLoginCodeText;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -47,21 +50,18 @@ public class Test : MonoBehaviour
         }
         catch (System.Exception ex)
         {
-
             Debug.LogException(ex);
         }
-
     }
 
 
     public async void RequestVerifyCode()
     {
-
         VerifyCodeSettings settings = new VerifyCodeSettings.Builder()
-               .SetAction(VerifyCodeSettings.ActionRegisterLogin)
-               .SendInterval(30)
-               .SetLang("en-US")
-               .Build();
+            .SetAction(VerifyCodeSettings.ActionRegisterLogin)
+            .SendInterval(30)
+            .SetLang("en-US")
+            .Build();
 
         Task<VerifyCodeResult> verifyCodeResultTask =
             AGConnectAuth.Instance.RequestVerifyCodeAsync(emailText.text, settings);
@@ -72,25 +72,21 @@ public class Test : MonoBehaviour
         }
         catch (System.Exception)
         {
-
             if (verifyCodeResultTask.Exception.InnerException is AGCException exception)
                 Debug.Log(exception.ErrorMessage);
             else
                 Debug.Log(verifyCodeResultTask.Exception.InnerException.ToString());
         }
-
-
     }
-
 
 
     public async void RegisterUser()
     {
         EmailUser emailUser = new EmailUser.Builder()
-              .SetEmail(emailText.text)
-              .SetVerifyCode(codeText.text)
-              .SetPassword(passwordText.text)
-              .Build();
+            .SetEmail(emailText.text)
+            .SetVerifyCode(codeText.text)
+            .SetPassword(passwordInput.text)
+            .Build();
 
         Task<ISignInResult> createUserTask = AGConnectAuth.Instance.CreateUserAsync(emailUser);
         try
@@ -102,7 +98,6 @@ public class Test : MonoBehaviour
         }
         catch (System.Exception)
         {
-            
             if (createUserTask.Exception.InnerException is AGCException exception)
                 Debug.Log(exception.ErrorMessage);
             else
@@ -116,8 +111,8 @@ public class Test : MonoBehaviour
         AGConnectUser user = AGConnectAuth.Instance.GetCurrentUser();
         if (user == null)
         {
-            var xxxxx = Huawei.Agconnect.Version.LibraryInfos.Instance.GetVersion();
-            IAGConnectAuthCredential credential = EmailAuthProvider.CredentialWithPassword(emailLoginText.text, passwordLoginText.text);
+            IAGConnectAuthCredential credential =
+                EmailAuthProvider.CredentialWithPassword(emailLoginText.text, passwordLoginText.text);
             Task<ISignInResult> signInTask = AGConnectAuth.Instance.SignInAsync(credential);
             try
             {
@@ -133,14 +128,11 @@ public class Test : MonoBehaviour
                 else
                     Debug.Log(signInTask.Exception.InnerException.ToString());
             }
-
-
         }
         else
         {
             AGConnectAuth.Instance.SignOut();
         }
-
     }
 
     public async void RequestVerifyCodeActionChangePassword()
@@ -151,11 +143,10 @@ public class Test : MonoBehaviour
             .SetLang("en-US")
             .Build();
         Task<VerifyCodeResult> verifyCodeResultTask =
-                AGConnectAuth.Instance.RequestVerifyCodeAsync(emailResetText.text, settings);
+            AGConnectAuth.Instance.RequestVerifyCodeAsync(AGConnectAuth.Instance.GetCurrentUser().GetEmail(), settings);
         try
         {
             await verifyCodeResultTask;
-
         }
         catch (System.Exception ex)
         {
@@ -165,6 +156,7 @@ public class Test : MonoBehaviour
                 Debug.Log(verifyCodeResultTask.Exception.InnerException.ToString());
         }
     }
+
     public async void RequestVerifyCodeActionResetPassword()
     {
         VerifyCodeSettings settings = new VerifyCodeSettings.Builder()
@@ -173,30 +165,26 @@ public class Test : MonoBehaviour
             .SetLang("en-US")
             .Build();
         Task<VerifyCodeResult> verifyCodeResultTask =
-                AGConnectAuth.Instance.RequestVerifyCodeAsync(emailChangeText.text, settings);
+            AGConnectAuth.Instance.RequestVerifyCodeAsync(emailResetText.text, settings);
         try
         {
             await verifyCodeResultTask;
             VerifyCodeResult verifyCodeResult = verifyCodeResultTask.Result;
-
         }
         catch (System.Exception ex)
         {
-
             if (verifyCodeResultTask.Exception.InnerException is AGCException exception)
                 Debug.Log(exception.ErrorMessage);
             else
                 Debug.Log(verifyCodeResultTask.Exception.InnerException.ToString());
         }
-
-
     }
 
     public async void ChangePassword()
     {
         var provider = 12;
         Task updatePasswordTask = AGConnectAuth.Instance.GetCurrentUser()
-            .UpdatePasswordAsync(passwordResetText.text, codeResetText.text, provider);
+            .UpdatePasswordAsync(passwordChangeText.text, codeChangeText.text, provider);
         try
         {
             await updatePasswordTask;
@@ -208,27 +196,24 @@ public class Test : MonoBehaviour
             else
                 Debug.Log(updatePasswordTask.Exception.InnerException.ToString());
         }
-
     }
 
     public async void ResetPassword()
     {
-        Task resetPasswordTask = AGConnectAuth.Instance.ResetPasswordAsync(newEmailText.text, passwordChangeText.text, codeChangeText.text);
+        Task resetPasswordTask =
+            AGConnectAuth.Instance.ResetPasswordAsync(emailResetText.text, passwordResetText.text, codeResetText.text);
         try
         {
             await resetPasswordTask;
             Debug.Log("Ba?ar?l?");
-
         }
         catch (System.Exception ex)
         {
-
             if (resetPasswordTask.Exception.InnerException is AGCException exception)
                 Debug.Log(exception.ErrorMessage);
             else
                 Debug.Log(resetPasswordTask.Exception.InnerException.ToString());
         }
-
     }
 
     public async void RequestVerifyCodeActionChangeEmail()
@@ -239,11 +224,10 @@ public class Test : MonoBehaviour
             .SetLang("en-US")
             .Build();
         Task<VerifyCodeResult> verifyCodeResultTask =
-                AGConnectAuth.Instance.RequestVerifyCodeAsync(newEmailText.text, settings);
+            AGConnectAuth.Instance.RequestVerifyCodeAsync(newEmailText.text, settings);
         try
         {
             await verifyCodeResultTask;
-
         }
         catch (System.Exception ex)
         {
@@ -262,7 +246,8 @@ public class Test : MonoBehaviour
 
         if (AGConnectAuth.Instance.GetCurrentUser() != null)
         {
-            Task updateEmail = AGConnectAuth.Instance.GetCurrentUser().UpdateEmailAsync(newEmailText.text, codeEmailChangeText.text);
+            Task updateEmail = AGConnectAuth.Instance.GetCurrentUser()
+                .UpdateEmailAsync(newEmailText.text, codeEmailChangeText.text);
             try
             {
                 await updateEmail;
@@ -271,7 +256,6 @@ public class Test : MonoBehaviour
             }
             catch (System.Exception)
             {
-
                 if (updateEmail.Exception.InnerException is AGCException exception)
                     Debug.Log(exception.ErrorMessage);
                 else
@@ -289,15 +273,13 @@ public class Test : MonoBehaviour
             .SetLang("en-US")
             .Build();
         Task<VerifyCodeResult> verifyCodeResultTask =
-                AGConnectAuth.Instance.RequestVerifyCodeAsync(emailLoginCodeText.text, settings);
+            AGConnectAuth.Instance.RequestVerifyCodeAsync(emailLoginCodeText.text, settings);
         try
         {
             await verifyCodeResultTask;
-
         }
         catch (System.Exception ex)
         {
-
             if (verifyCodeResultTask.Exception.InnerException is AGCException exception)
                 Debug.Log(exception.ErrorMessage);
             else
@@ -312,7 +294,8 @@ public class Test : MonoBehaviour
         if (user == null)
         {
             IAGConnectAuthCredential credential =
-                EmailAuthProvider.CredentialWithVerifyCode(emailLoginCodeText.text, passwordLoginCodeText.text, codeLoginCodeText.text);
+                EmailAuthProvider.CredentialWithVerifyCode(emailLoginCodeText.text, passwordLoginCodeText.text,
+                    codeLoginCodeText.text);
 
             Task<ISignInResult> signInTask = AGConnectAuth.Instance.SignInAsync(credential);
             try
@@ -323,13 +306,11 @@ public class Test : MonoBehaviour
             }
             catch (System.Exception)
             {
-
                 if (signInTask.Exception.InnerException is AGCException exception)
                     Debug.Log(exception.ErrorMessage);
                 else
                     Debug.Log(signInTask.Exception.InnerException.ToString());
             }
-
         }
     }
 
@@ -341,8 +322,8 @@ public class Test : MonoBehaviour
             AGConnectAuth.Instance.SignOut();
         }
     }
-
 }
+
 class OnTokenListener : IOnTokenListener
 {
     public void OnChanged(ITokenSnapshot snapshot)
@@ -352,7 +333,6 @@ class OnTokenListener : IOnTokenListener
         if (state == TokenSnapshotState.TokenUpdated)
         {
             string token = snapshot.Token;
-
         }
         else if (state == TokenSnapshotState.TokenInvalid)
         {
