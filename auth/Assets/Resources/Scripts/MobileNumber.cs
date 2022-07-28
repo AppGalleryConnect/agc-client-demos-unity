@@ -24,11 +24,13 @@ using UnityEngine.UI;
 
 public class MobileNumber : MonoBehaviour
 {
-    public Text codeText, countryCodeText, passwordText, phoneText, userText;
-    public Text passwordLoginText, phoneLoginText, countryCodeLoginText, verifyCodeLoginText;
+    public Text codeText, countryCodeText,  phoneText, userText;
+    public Text  phoneLoginText, countryCodeLoginText, verifyCodeLoginText;
     public Text phoneChangeNumberText, countryCodeChangeNumberText, verifyCodeChangeNumberText;
     public Text passwordChangePassText, verifyCodeChangePassText;
     public Text passwordResetPassText, verifyCodeResetPassText, phoneResetPassText, countryCodeResetPassText;
+
+    public InputField passwordText,passwordLoginText;
     // Start is called before the first frame update
     void Start()
     {
@@ -92,12 +94,12 @@ public class MobileNumber : MonoBehaviour
 
 
 
-    public async void SignInMobileVerifyCode()
+    public async void SignInMobile()
     {
         AGConnectUser user = AGConnectAuth.Instance.GetCurrentUser();
         if (user == null)
         {
-            IAGConnectAuthCredential credential = PhoneAuthProvider.CredentialWithVerifyCode(countryCodeLoginText.text, phoneLoginText.text, passwordLoginText.text, verifyCodeLoginText.text);
+            IAGConnectAuthCredential credential = PhoneAuthProvider.CredentialWithPassword(countryCodeLoginText.text, phoneLoginText.text, passwordLoginText.text);
             Task<ISignInResult> signInTask = AGConnectAuth.Instance.SignInAsync(credential);
             try
             {
