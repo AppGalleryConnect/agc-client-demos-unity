@@ -1,0 +1,16 @@
+<!--
+Copyright (c) Huawei Technologies Co., Ltd. 2022. All rights reserved.
+-->
+<linker>
+    <assembly fullname="AgconnectApi" />
+    <assembly fullname="AgconnectAuth" />
+    <assembly fullname="AgconnectDataStore" />
+    <assembly fullname="AgconnectCommon" />
+    <assembly fullname="AgconnectCredential" />
+    <assembly fullname="AgconnectHttps"/>
+    <assembly fullname="AgconnectFunction"/>
+    <assembly fullname="AgconnectDB"/>
+    <assembly fullname="NLog"/>
+    <assembly fullname="Google.Protobuf"/>
+    <assembly fullname="BouncyCastle.Crypto"/>
+</linker>
