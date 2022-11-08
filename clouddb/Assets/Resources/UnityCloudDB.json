@@ -1,0 +1,146 @@
+{
+  "schemaVersion": 11,
+  "permissions": [
+    {
+      "permissions": [
+        {
+          "role": "World",
+          "rights": [
+            "Read"
+          ]
+        },
+        {
+          "role": "Authenticated",
+          "rights": [
+            "Read",
+            "Upsert",
+            "Delete"
+          ]
+        },
+        {
+          "role": "Creator",
+          "rights": [
+            "Read",
+            "Upsert",
+            "Delete"
+          ]
+        },
+        {
+          "role": "Administrator",
+          "rights": [
+            "Read",
+            "Upsert",
+            "Delete"
+          ]
+        }
+      ],
+      "objectTypeName": "Board"
+    }
+  ],
+  "objectTypes": [
+    {
+      "indexes": [],
+      "objectTypeName": "Board",
+      "fields": [
+        {
+          "isNeedEncrypt": false,
+          "fieldName": "Id",
+          "notNull": true,
+          "belongPrimaryKey": true,
+          "fieldType": "String"
+        },
+        {
+          "isNeedEncrypt": false,
+          "fieldName": "Gap0",
+          "notNull": false,
+          "belongPrimaryKey": false,
+          "fieldType": "String"
+        },
+        {
+          "isNeedEncrypt": false,
+          "fieldName": "Gap1",
+          "notNull": false,
+          "belongPrimaryKey": false,
+          "fieldType": "String"
+        },
+        {
+          "isNeedEncrypt": false,
+          "fieldName": "Gap2",
+          "notNull": false,
+          "belongPrimaryKey": false,
+          "fieldType": "String"
+        },
+        {
+          "isNeedEncrypt": false,
+          "fieldName": "Gap3",
+          "notNull": false,
+          "belongPrimaryKey": false,
+          "fieldType": "String"
+        },
+        {
+          "isNeedEncrypt": false,
+          "fieldName": "Gap4",
+          "notNull": false,
+          "belongPrimaryKey": false,
+          "fieldType": "String"
+        },
+        {
+          "isNeedEncrypt": false,
+          "fieldName": "Gap5",
+          "notNull": false,
+          "belongPrimaryKey": false,
+          "fieldType": "String"
+        },
+        {
+          "isNeedEncrypt": false,
+          "fieldName": "Gap6",
+          "notNull": false,
+          "belongPrimaryKey": false,
+          "fieldType": "String"
+        },
+        {
+          "isNeedEncrypt": false,
+          "fieldName": "Gap7",
+          "notNull": false,
+          "belongPrimaryKey": false,
+          "fieldType": "String"
+        },
+        {
+          "isNeedEncrypt": false,
+          "fieldName": "Gap8",
+          "notNull": false,
+          "belongPrimaryKey": false,
+          "fieldType": "String"
+        },
+        {
+          "isNeedEncrypt": false,
+          "fieldName": "HasPlayerX",
+          "notNull": false,
+          "belongPrimaryKey": false,
+          "fieldType": "Boolean"
+        },
+        {
+          "isNeedEncrypt": false,
+          "fieldName": "HasPlayerO",
+          "notNull": false,
+          "belongPrimaryKey": false,
+          "fieldType": "Boolean"
+        },
+        {
+          "isNeedEncrypt": false,
+          "fieldName": "Turn",
+          "notNull": false,
+          "belongPrimaryKey": false,
+          "fieldType": "String"
+        },
+        {
+          "isNeedEncrypt": false,
+          "fieldName": "LastIndex",
+          "notNull": false,
+          "belongPrimaryKey": false,
+          "fieldType": "Integer"
+        }
+      ]
+    }
+  ]
+}
