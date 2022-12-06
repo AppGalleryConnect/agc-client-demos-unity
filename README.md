@@ -1,4 +1,4 @@
-# AGC_Unity_Client_SDK_Demo
+# agc_unity_demo
 [![license](https://img.shields.io/badge/license-Apache--2.0-green)](./LICENCE)
 
 This repository contains the source code for AppGallery Connect Unity demos, which are developed by the AppGallery Connect team.
